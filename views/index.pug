@@ -1,0 +1,40 @@
+extends layout
+
+block content
+  h1= title
+  p #{title} in NodeJS using Open Weather API
+  | &nbsp;&nbsp;
+
+  .row
+    .col-md-6
+      form.form-inline(method='POST', action='weather')
+        form-group
+          label.sr-only(for="city") City Name
+          input.form-control(name="city" placeholder="Enter City Name" required='required')
+        button.btn.btn-primary Fetch Weather
+      hr
+
+  .row
+    .col-md-12
+        p &nbsp;&nbsp;
+          strong Weather Forecast #{forecast}
+        table.table
+          thead
+            tr
+              th Longitude / Latitude
+              th Pressure
+              th Temprature
+              th Humidty
+              th Speed
+          tbody
+            if body
+              tr
+                td #{body.coord.lon} / #{body.coord.lon}
+                td= body.main.pressure
+                td= body.main.temp
+                td= body.main.humidity
+                td= body.wind.speed
+            else
+              tr
+                td(colspan="6")
+                  | Enter city name and click Fetch Weather button
